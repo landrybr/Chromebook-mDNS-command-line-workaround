@@ -1,0 +1,23 @@
+Workaround for command line mDNS .local name resolution in ChromeOS
+
+For some reason ChromeOS doesn't support .local mDNS name resolution even though avahi is running.  Someone pointed this out in 2011, but it's still not solved as of (March 2017).  
+(See https://bugs.chromium.org/p/chromium/issues/detail?id=199397
+and https://bugs.chromium.org/p/chromium/issues/detail?id=626377)
+
+I believe that you can solve this problem by editing /etc/nsswitch.conf and adding:
+mdns_minimal [NOUTFOUND=return]
+to the hosts line, although I have not tried this.  This would require removing verification on the root filesyste, which can lead to its own problems (It can cause auto-updates to fail).
+
+
+As a result of all of this I decided to make a simple work around that uses the built-in avahi-resolve-hostname as part of an awk-based script.
+
+Usage:
+bash run_command_check_avahi.sh ping mydomain.local
+
+The smart way to use it is to make aliases in your /home/chronos/user/.bashrc file.
+E.g.
+alias ping="/bin/bash /home/chronos/user/scripts/run_command_check_avahi.sh ping"
+alias ssh="/bin/bash /home/chronos/user/scripts/run_command_check_avahi.sh ssh"
+alias scp="/bin/bash /home/chronos/user/scripts/run_command_check_avahi.sh scp"
+
+(I put the script in a directory named scripts, but obviously you can put in anywhere you want.)
