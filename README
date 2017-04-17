@@ -6,7 +6,7 @@ and https://bugs.chromium.org/p/chromium/issues/detail?id=626377)
 
 I believe that you can solve this problem by editing /etc/nsswitch.conf and adding:
 mdns_minimal [NOUTFOUND=return]
-to the hosts line, although I have not tried this.  This would require removing verification on the root filesyste, which can lead to its own problems (It can cause auto-updates to fail).
+to the hosts line, although I have not tried this.  This would require removing verification on the root filesystem, which can lead to its own problems (It can cause auto-updates to fail).
 
 
 As a result of all of this I decided to make a simple work around that uses the built-in avahi-resolve-hostname as part of an awk-based script.
