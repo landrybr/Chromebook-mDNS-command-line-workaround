@@ -1,6 +1,6 @@
 Workaround for command line mDNS .local name resolution in ChromeOS
 
-For some reason ChromeOS doesn't support .local mDNS name resolution even though avahi is running.  Someone pointed this out in 2011, but it's still not solved as of (March 2017).  
+For some reason ChromeOS doesn't support .local mDNS name resolution even though avahi is running.  Someone pointed this out in 2011, but it's still not solved as of March 2017.  
 (See https://bugs.chromium.org/p/chromium/issues/detail?id=199397
 and https://bugs.chromium.org/p/chromium/issues/detail?id=626377)
 
